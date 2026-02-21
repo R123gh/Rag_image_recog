@@ -103,12 +103,6 @@ Instructions:
 - It should handle all type of questions and give me similar answers for all asked answer
 - If the video text is not present so explain the concept in precise 
 -Always provide the informative results 
-- Do not mentioned like not specified in the video
-- only give batter result 
-- Do not show to users keyword like In video mentioned 
-- Give the result in proper do not miss any text 
-- Work like professional lioke othe llm 
-
 
 Provide a clear and helpful answer:"""
         
