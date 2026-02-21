@@ -275,7 +275,7 @@ st.markdown("""
 
 st.title(" RAG Based system ")
 
-tab1, tab2 = st.tabs(["💬 Text/Voice Chat", "📷 Image Analysis"])
+tab1, tab2 = st.tabs([" Text/Voice Chat", " Image Analysis"])
 
 with tab1:
     col1, col2 = st.columns([5, 1])
@@ -290,10 +290,10 @@ with tab1:
         )
     
     with col2:
-        voice_btn = st.button("🎤", help="Voice Input", use_container_width=True, key="voice_btn")
+        voice_btn = st.button("Voice Input", help="Voice Input", use_container_width=True, key="voice_btn")
     
     if voice_btn:
-        with st.spinner("🎤 Listening..."):
+        with st.spinner(" Listening..."):
             voice_text = record_voice()
             if voice_text:
                 st.session_state.voice_query = voice_text
@@ -318,17 +318,17 @@ with tab1:
             col_btn1, col_btn2 = st.columns([1, 1])
             
             with col_btn1:
-                listen_btn = st.button("🔊 Listen", key="listen_text_btn", use_container_width=True)
+                listen_btn = st.button(" Listen", key="listen_text_btn", use_container_width=True)
             
             with col_btn2:
-                if st.button("🔄 Clear", key="clear_text_btn", use_container_width=True):
+                if st.button("Clear", key="clear_text_btn", use_container_width=True):
                     st.session_state.voice_query = None
                     st.session_state.text_answer = None
                     st.rerun()
             
             if listen_btn and st.session_state.text_answer:
                 try:
-                    with st.spinner("🔊 Generating audio..."):
+                    with st.spinner(" Generating audio..."):
                         audio_file = speak_text(st.session_state.text_answer)
                         with open(audio_file, 'rb') as f:
                             st.audio(f.read(), format='audio/mp3', autoplay=False)
