@@ -275,7 +275,7 @@ st.markdown("""
 
 st.title(" RAG Based system ")
 
-tab1, tab2 = st.tabs(["💬 Text/Voice Chat", "📷 Image Analysis"])
+tab1, tab2 = st.tabs([" Text/Voice Chat", " Image Analysis"])
 
 with tab1:
     col1, col2 = st.columns([5, 1])
@@ -290,7 +290,7 @@ with tab1:
         )
     
     with col2:
-        voice_btn = st.button("🎤", help="Voice Input", use_container_width=True, key="voice_btn")
+        voice_btn = st.button( help="Voice Input", use_container_width=True, key="voice_btn")
     
     if voice_btn:
         with st.spinner("🎤 Listening..."):
@@ -318,17 +318,17 @@ with tab1:
             col_btn1, col_btn2 = st.columns([1, 1])
             
             with col_btn1:
-                listen_btn = st.button("🔊 Listen", key="listen_text_btn", use_container_width=True)
+                listen_btn = st.button(" Listen", key="listen_text_btn", use_container_width=True)
             
             with col_btn2:
-                if st.button("🔄 Clear", key="clear_text_btn", use_container_width=True):
+                if st.button(" Clear", key="clear_text_btn", use_container_width=True):
                     st.session_state.voice_query = None
                     st.session_state.text_answer = None
                     st.rerun()
             
             if listen_btn and st.session_state.text_answer:
                 try:
-                    with st.spinner("🔊 Generating audio..."):
+                    with st.spinner(" Generating audio..."):
                         audio_file = speak_text(st.session_state.text_answer)
                         with open(audio_file, 'rb') as f:
                             st.audio(f.read(), format='audio/mp3', autoplay=False)
@@ -350,7 +350,7 @@ with tab2:
             col_img, col_controls = st.columns([2, 1])
             
             with col_img:
-                with st.spinner("📷 Processing..."):
+                with st.spinner(" Processing..."):
                     display_image, img_bytes, original_bytes = process_image(uploaded_file)
                 st.image(display_image, caption="Uploaded Image", width=250)
             
@@ -370,7 +370,7 @@ with tab2:
                 )
                 
                 analyze_button = st.button(
-                    "🚀 Analyze",
+                    " Analyze",
                     type="primary",
                     use_container_width=True
                 )
@@ -378,7 +378,7 @@ with tab2:
             if analyze_button:
                 st.markdown("---")
                 
-                with st.spinner("📝 Extracting text..."):
+                with st.spinner(" Extracting text..."):
                     try:
                         with tempfile.NamedTemporaryFile(delete=False, suffix='.jpg') as tmp:
                             tmp.write(original_bytes)
@@ -405,7 +405,7 @@ with tab2:
                 st.markdown('</div>', unsafe_allow_html=True)
                 
                 if not extracted_text.startswith("Error") and extracted_text != "No text found in image":
-                    with st.spinner("🎥 Searching database..."):
+                    with st.spinner(" Searching database..."):
                         llm_answer, video_context, search_results = get_combined_answer(
                             extracted_text, 
                             optional_query, 
@@ -444,7 +444,7 @@ with tab2:
 {llm_answer}
 """
                     st.download_button(
-                        "📥 Download",
+                        " Download",
                         full_result,
                         file_name="result.txt",
                         mime="text/plain",
