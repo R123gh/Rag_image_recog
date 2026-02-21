@@ -290,7 +290,7 @@ with tab1:
         )
     
     with col2:
-        voice_btn = st.button( help="Voice Input", use_container_width=True, key="voice_btn")
+        voice_btn = st.button("Voice Input", help="Voice Input", use_container_width=True, key="voice_btn")
     
     if voice_btn:
         with st.spinner("🎤 Listening..."):
