@@ -106,6 +106,8 @@ Instructions:
 - Do not mentioned like not specified in the video
 - only give batter result 
 - Do not show to users keyword like In video mentioned 
+- Give the result in proper do not miss any text 
+- Work like professional lioke othe llm 
 
 
 Provide a clear and helpful answer:"""
