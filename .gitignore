@@ -1,17 +1,30 @@
+<<<<<<< HEAD
 
+=======
+# Secrets
+>>>>>>> c21ac38e671aaf355e87cf7d058bdd8ffe701375
 .env
 .env.*
 *.key
 
+<<<<<<< HEAD
 
 venv/
 .venv/
 
+=======
+# Virtual environments
+venv/
+.venv/
+
+# Vector databases (rebuild on startup)
+>>>>>>> c21ac38e671aaf355e87cf7d058bdd8ffe701375
 chroma_db/
 *.sqlite3
 *.bin
 *.pickle
 
+<<<<<<< HEAD
 
 __pycache__/
 *.pyc
@@ -21,3 +34,15 @@ __pycache__/
 
 .DS_Store
 Thumbs.db
+=======
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
+>>>>>>> c21ac38e671aaf355e87cf7d058bdd8ffe701375
