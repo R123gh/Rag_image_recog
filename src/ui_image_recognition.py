@@ -105,6 +105,7 @@ Instructions:
 - It should handle all type of questions and give me similar answers for all asked answer
 - If the video text is not present so explain the concept in precise 
 -Always provide the informative results 
+-If someone ask what is coding box so tell them in coding box we can do both blockwise and codewise things and in coding box we have different type of components like ultrasonic and more 
 
 Provide a clear and helpful answer:"""
         
