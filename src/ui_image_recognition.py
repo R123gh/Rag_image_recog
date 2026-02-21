@@ -27,6 +27,8 @@ if 'text_answer' not in st.session_state:
     st.session_state.text_answer = None
 if 'voice_query' not in st.session_state:
     st.session_state.voice_query = None
+if 'submitted_query' not in st.session_state:
+    st.session_state.submitted_query = None
 
 def validate_environment():
     required_keys = ['GROQ_API_KEY', 'OCR_SPACE_API_KEY']
@@ -270,6 +272,14 @@ st.markdown("""
         margin: 15px 0;
         border-left: 4px solid #667eea;
     }
+    .query-section {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .enter-btn {
+        margin-top: 2px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -278,19 +288,26 @@ st.title(" RAG Based system ")
 tab1, tab2 = st.tabs(["💬 Text/Voice Chat", "📷 Image Analysis"])
 
 with tab1:
-    col1, col2 = st.columns([5, 1])
+    # Create a container for the query input section
+    query_container = st.container()
     
-    with col1:
-        query = st.text_input(
-            "",
-            placeholder="Type your question here...",
-            label_visibility="collapsed",
-            key="text_input",
-            max_chars=500
-        )
-    
-    with col2:
-        voice_btn = st.button("🎤", help="Voice Input", use_container_width=True, key="voice_btn")
+    with query_container:
+        col1, col2, col3 = st.columns([4, 1, 1])
+        
+        with col1:
+            query = st.text_input(
+                "",
+                placeholder="Type your question here...",
+                label_visibility="collapsed",
+                key="text_input",
+                max_chars=500
+            )
+        
+        with col2:
+            voice_btn = st.button("🎤", help="Voice Input", use_container_width=True, key="voice_btn")
+        
+        with col3:
+            enter_btn = st.button("⏎ Enter", help="Submit Question", use_container_width=True, key="enter_btn")
     
     if voice_btn:
         with st.spinner("🎤 Listening..."):
@@ -302,12 +319,18 @@ with tab1:
             else:
                 st.error("Could not understand.")
     
-    if st.session_state.voice_query and not query:
-        query = st.session_state.voice_query
+    # Check if Enter button is pressed or if there's a voice query to submit
+    if enter_btn and query:
+        st.session_state.submitted_query = query
+    elif voice_btn and st.session_state.voice_query:
+        st.session_state.submitted_query = st.session_state.voice_query
+    elif st.session_state.voice_query and not query:
+        st.session_state.submitted_query = st.session_state.voice_query
     
-    if query:
+    # Process the submitted query
+    if st.session_state.submitted_query:
         with st.spinner(" Thinking..."):
-            answer = get_answer_text_only(query, top_k=5)
+            answer = get_answer_text_only(st.session_state.submitted_query, top_k=5)
             st.session_state.text_answer = answer
         
         if answer and not answer.startswith("Error"):
@@ -324,6 +347,7 @@ with tab1:
                 if st.button("🔄 Clear", key="clear_text_btn", use_container_width=True):
                     st.session_state.voice_query = None
                     st.session_state.text_answer = None
+                    st.session_state.submitted_query = None
                     st.rerun()
             
             if listen_btn and st.session_state.text_answer:
