@@ -1,0 +1,25 @@
+# Secrets
+.env
+.env.*
+*.key
+
+# Virtual environments
+venv/
+.venv/
+
+# Vector databases (rebuild on startup)
+chroma_db/
+*.sqlite3
+*.bin
+*.pickle
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
